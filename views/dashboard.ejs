@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <style>
+           /* Logout link */
+
+
+        /* Reset some default styles */
+        body, h1, h2, p, ul, li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        /* Set a background color and font for the entire page */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+            margin: 0;
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+            color: #007BFF;
+        }
+
+        /* Subheadings */
+        h2 {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #343a40;
+        }
+
+        /* Styling for links */
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        /* Form styling */
+        form {
+            margin-top: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #343a40;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        input[type="submit"],
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        input[type="submit"]:hover,
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* List styling */
+        ul {
+            margin-top: 15px;
+        }
+
+        li {
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        li:hover {
+            transform: scale(1.03);
+        }
+
+        /* Comments styling */
+        ul ul {
+            margin-top: 10px;
+        }
+
+        /* Horizontal list for category filters */
+        ul.category-list {
+            display: flex;
+            list-style: none;
+            margin-top: 30px;
+            padding: 0;
+            justify-content: center;
+        }
+
+        ul.category-list li {
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        /* Logout link */
+a[href="/logout"] {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    background-color: #d9534f;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+a[href="/logout"]:hover {
+    background-color: #c9302c;
+}
+
+        /* Style for comments list and comment form */
+        .comment-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .comment-list li {
+            margin-bottom: 10px;
+        }
+
+        .show-comments-button {
+            background-color: #02f840;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .show-comments-button:hover {
+            background-color: #02d630;
+        }
+
+        /* Style for displaying post images */
+        .post-container {
+            position: relative;
+            background-color: #fff;
+            border: 1px solid #010101;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .post-container:hover {
+            transform: scale(1.02);
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+        }
+
+        .post-image {
+            width: 150px;
+            height: 209.5px;
+            object-fit: cover;
+            border: 2px solid #0e0d0d;
+            border-radius: 8px;
+            position: absolute;
+            top: 30.95px;
+            right: 15px;
+        }
+
+        .like-dislike {
+            margin-top: 10px;
+        }
+
+        .like-dislike a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        /* Add a specific class for styling the like and dislike buttons */
+        .like-dislike a.like-btn {
+            color: #28a745;
+        }
+
+        .like-dislike a.dislike-btn {
+            color: #dc3545;
+        }
+        .auth-buttons {
+            margin-top: 20px;
+        }
+
+        .auth-buttons a {
+            display: inline-block;
+            margin-right: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .auth-buttons a:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .post-container {
+                width: 90%;
+                margin-right: -10px;
+                margin-left: 50px;
+                padding: 20px;
+            }
+
+            h2.why-built {
+                font-size: 24px;
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            p.why-built {
+                font-size: 18px;
+                margin: 0 auto 20px;
+                max-width: 80%;
+                text-align: center;
+            }
+            h2.info {
+                font-size: 24px;
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            p.info {
+                font-size: 18px;
+                margin: 0 auto 20px;
+                max-width: 80%;
+                text-align: center;
+            }
+
+            .post-image {
+                width: 140px;
+                height: 180.5px;
+                object-fit: cover;
+                border: 2px solid #0e0d0d;
+                border-radius: 8px;
+                position: absolute;
+                top: 63.95px;
+                right: 95px;
+            }
+
+            ul.category-list {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            ul.category-list li {
+                margin: 5px;
+            }
+        }
+
+        /* Additional styling for "About Us," "Contact Us," and "Privacy Policy" links */
+        .additional-links {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            width: 80%;
+        }
+
+        .additional-links a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #007BFF;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .additional-links a:hover {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        
+
+        /* Improved styling for the "Why I Built This Website" section */
+        .why-built {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 24px;
+            color: #333;
+        }
+        .info{
+            text-align: center;
+            margin-top: 30px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Footer styling */
+        footer {
+            margin-top: auto;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Welcome<%= user ? ', ' + user.username : '' %>!</h1>
+    <div class="additional-links">
+        <a href="/about-us">About Us</a>
+        <a href="/contact-us">Contact Us</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+    </div>
+
+    <% if (user) { %>
+        <h2>Your Profile</h2>
+        <p>Username: <%= user.username %></p>
+        <p>Email: <%= user.email %></p>
+    <% } %>
+
+    <h2>Post a Link</h2>
+    <% if (user) { %>
+        <form action="/post-link" method="post" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br>
+            <label for="link">Link:</label>
+            <input type="text" id="link" name="link" required><br>
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Mods Download">Mods Download</option>
+                <option value="Education">Education</option>
+                <option value="Live Links">Live Links</option>
+                <option value="OTTs">OTTs</option>
+                <option value="Others">Others</option>
+            </select><br>
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*"><br>
+            <input type="submit" value="Submit">
+        </form>
+    <% } else { %>
+        <!-- Display login/signup buttons when the user is not logged in -->
+        <div class="auth-buttons">
+            <a href="/login">Login</a>
+            <a href="/register">Sign Up</a>
+        </div>
+    <% } %>
+    <h2 class="why-built">Why I Built This Website ?</h2>
+<p class="why-built">To unite passions and foster meaningful conversations. Explore, share, and connect in a world of limitless possibilities.</p>
+         <h2 class = "info">Disclamier!!</h2>
+         <p class="info"> "Don't post or upload any unwanted or illegal content links. If you do, it will be removed by the database administrator." </p>
+    <h2>Filter by Category:</h2>
+    <ul class="category-list">
+        <li><a href="/">All</a></li>
+        <li><a href="/?category=Entertainment">Entertainment</a></li>
+        <li><a href="/?category=Mods Download">Mods Download</a></li>
+        <li><a href="/?category=Education">Education</a></li>
+        <li><a href="/?category=Live Links">Live Links</a></li>
+        <li><a href="/?category=OTTs">OTTs</a></li>
+        <li><a href="/?category=Others">Others</a></li>
+    </ul>
+
+    <h2>Posts</h2>
+    <% if (error) { %>
+        <p>Error: <%= error %></p>
+    <% } %>
+    <form action="/" method="get">
+        <label for="search">Search by Title:</label>
+        <input type="text" id="search" name="search" oninput="searchPosts()">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        <% for (const category in posts) { %>
+            <h3><%= category %></h3>
+            <% posts[category].forEach(post => { %>
+                <li class="post-container">
+                    <hr>
+                    <div class="post-content">
+                        <strong><%= post.userId.username %>:</strong> <%= post.title %><br>
+                        <a href="<%= post.link %>" target="_blank"><%= post.link %></a><br>
+                        <strong>Category:</strong> <%= post.category %><br>
+                        <div class="like-dislike">
+                            <a href="/like-post/<%= post._id %>">👍 Like</a>
+                            <a href="/dislike-post/<%= post._id %>">👎 Dislike</a>
+                        </div>
+                        <strong>Likes:</strong> <%= post.likes.length %>
+                        <strong>Dislikes:</strong> <%= post.dislikes.length %><br>
+                        <button class="show-comments-button" data-post-id="<%= post._id %>">See Comments</button>
+                        <small><%= timeAgo(post.timestamp) %></small>
+                        <h3>Comments</h3>
+                        <ul class="comment-list" data-post-id="<%= post._id %>">
+                            <% post.comments.forEach(comment => { %>
+                                <li>
+                                    <strong><%= comment.userId.username %>:</strong> <%= comment.text %><br>
+                                </li>
+                            <% }); %>
+                        </ul>
+                        <form action="/comment/<%= post._id %>" method="post">
+                            <label for="comment">Add a comment:</label>
+                            <input type="text" id="comment" name="text" required>
+                            <button type="submit">Comment</button>
+                        </form>
+                    </div>
+                    <% if (post.image && post.image.data) { %>
+                        <img src="data:<%= post.image.contentType %>;base64,<%= post.image.data.toString('base64') %>" alt="Post Image" class="post-image">
+                    <% } %>
+                </li>
+            <% }); %>
+        <% } %>
+    </ul>
+    <% if (user) { %>
+        <a href="/logout">Logout</a>
+    <% } %>
+    
+
+    <script>
+        function timeAgo(timestamp) {
+            const now = new Date();
+            const postedTime = new Date(timestamp);
+            const timeDiff = now - postedTime;
+            const seconds = Math.floor(timeDiff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+
+            if (days > 0) {
+                return days + ' day(s) ago';
+            } else if (hours > 0) {
+                return hours + ' hour(s) ago';
+            } else if (minutes > 0) {
+                return minutes + ' minute(s) ago';
+            } else {
+                return 'Just now';
+            }
+        }
+
+        const showCommentsButtons = document.querySelectorAll('.show-comments-button');
+        showCommentsButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const postId = button.getAttribute('data-post-id');
+                const commentsList = document.querySelector(`.comment-list[data-post-id="${postId}"]`);
+                const commentForm = document.querySelector(`.comment-form[data-post-id="${postId}"]`);
+
+                if (commentsList.style.display === 'none' || commentsList.style.display === '') {
+                    commentsList.style.display = 'block';
+                    commentForm.style.display = 'block';
+                    button.textContent = 'Hide Comments';
+                } else {
+                    commentsList.style.display = 'none';
+                    commentForm.style.display = 'none';
+                    button.textContent = 'See Comments';
+                }
+            });
+        });
+
+        // Add event listeners for like and dislike buttons
+        const likeButtons = document.querySelectorAll('.like-button');
+        const dislikeButtons = document.querySelectorAll('.dislike-button');
+
+        likeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const postId = button.getAttribute('data-post-id');
+                // Implement the logic for handling a like
+                console.log(`Like clicked for post ${postId}`);
+            });
+        });
+
+        dislikeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const postId = button.getAttribute('data-post-id');
+                // Implement the logic for handling a dislike
+                console.log(`Dislike clicked for post ${postId}`);
+            });
+        });
+        function searchPosts() {
+        const searchInput = document.getElementById('search').value.toLowerCase();
+        const posts = document.querySelectorAll('.post-container');
+
+        posts.forEach(post => {
+            const title = post.querySelector('.post-content strong').textContent.toLowerCase();
+            if (title.includes(searchInput)) {
+                post.style.display = 'block';
+            } else {
+                post.style.display = 'none';
+            }
+        });
+    }
+    </script>
+</body>
+</html>
