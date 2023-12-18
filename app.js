@@ -256,6 +256,28 @@ app.get('/logout', (req, res) => {
     res.redirect('/login');
   });
 });
+app.post('/post-link', upload.single('image'), isLoggedIn, async (req, res) => {
+  const { title, link, category } = req.body;
+  const userId = req.session.user._id;
+  const image = req.file;
+
+  try {
+    const newPost = new Post({
+      title,
+      link,
+      category,
+      userId,
+      image: image ? { data: image.buffer, contentType: image.mimetype } : undefined,
+    });
+
+    await newPost.save();
+    console.log('Post created successfully.');
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('dashboard', { error: 'Internal server error' });
+  }
+});
 
 app.post('/post-description', upload.single('image'), isLoggedIn, async (req, res) => {
   const { title, link, category } = req.body;
