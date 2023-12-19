@@ -91,11 +91,11 @@ function timeAgo(timestamp) {
   const days = Math.floor(hours / 24);
 
   if (days > 0) {
-    return days + ' day(s) ago';
+    return days + 'day(s) ago';
   } else if (hours > 0) {
-    return hours + ' hour(s) ago';
+    return hours + 'hrs ago';
   } else if (minutes > 0) {
-    return minutes + ' minute(s) ago';
+    return minutes + 'min ago';
   } else {
     return 'Just now';
   }
@@ -148,12 +148,12 @@ app.post('/register', async (req, res) => {
 
     await newUser.save();
     console.log('User registered successfully.');
-    res.redirect('/');
+    res.redirect('login-register');
   } catch (err) {
     console.error(err);
     res
       .status(500)
-      .render('dashboard', { error: 'Internal server error' });
+      .render('login-register', { error: 'Internal server error' });
   }
 });
 
