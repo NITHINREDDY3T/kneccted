@@ -147,7 +147,7 @@ app.post('/register', async (req, res) => {
 
     await newUser.save();
     console.log('User registered successfully.');
-    res.redirect('login-register');
+    res.redirect('dashboard');
   } catch (err) {
     console.error(err);
     res
