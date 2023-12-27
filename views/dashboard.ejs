@@ -355,7 +355,6 @@ a[href="/logout"]:hover {
     </style>
 </head>
 <body>
-    
     <h1>Welcome<%= user ? ', ' + user.username : '' %></h1>
     <div class="additional-links">
         <a href="/about-us">About Us</a>
@@ -393,13 +392,16 @@ a[href="/logout"]:hover {
         <!-- Display login/signup buttons when the user is not logged in -->
         <div class="auth-buttons">
             <a href="/login">Login</a>
-            <a href="/register">Sign Up</a>
+            <a href="/sign">Sign Up</a>
         </div>
     <% } %>
+
     <h2 class="why-built">Why I Built This Website ?</h2>
-<p class="why-built">To unite passions and foster meaningful conversations. Explore, share, and connect in a world of limitless possibilities.</p>
-         <h2 class = "info">Disclamier!!</h2>
-         <p class="info"> "Don't post or upload any unwanted or illegal content links. If you do, it will be removed by the database administrator." </p>
+    <p class="why-built">To unite passions and foster meaningful conversations. Explore, share, and connect in a world of limitless possibilities.</p>
+
+    <h2 class="info">Disclaimer!!</h2>
+    <p class="info">"Don't post or upload any unwanted or illegal content links. If you do, it will be removed by the database administrator."</p>
+
     <h2>Filter by Category:</h2>
     <ul class="category-list">
         <li><a href="/">All</a></li>
@@ -446,7 +448,7 @@ a[href="/logout"]:hover {
                                 </li>
                             <% }); %>
                         </ul>
-                        <form action="/comment/<%= post._id %>" method="post">
+                        <form class="comment-form" action="/comment/<%= post._id %>" method="post">
                             <label for="comment">Add a comment:</label>
                             <input type="text" id="comment" name="text" required>
                             <button type="submit">Comment</button>
@@ -462,7 +464,6 @@ a[href="/logout"]:hover {
     <% if (user) { %>
         <a href="/logout">Logout</a>
     <% } %>
-    
 
     <script>
         function timeAgo(timestamp) {
