@@ -122,21 +122,21 @@ const isLoggedIn = (req, res, next) => {
 };
 
 app.get('/login', (req, res) => {
-  res.render('login-register', { error: null });
+  res.render('login', { error: null });
 });
 
-app.get('/register', (req, res) => {
-  res.render('login-register', { error: null });
+app.get('/sign', (req, res) => {
+  res.render('sign', { error: null });
 });
 
-app.post('/register', async (req, res) => {
+app.post('/sign', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      return res.render('login-register', { error: 'Email already registered' });
+      return res.render('sign', { error: 'Email already registered' });
     }
 
     const newUser = new User({
@@ -147,17 +147,11 @@ app.post('/register', async (req, res) => {
 
     await newUser.save();
     console.log('User registered successfully.');
-    res.redirect('dashboard');
+    res.redirect('/login');
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .render('login-register', { error: 'Internal server error' });
+    res.status(500).render('sign', { error: 'Internal server error' });
   }
-});
-
-app.get('/login', (req, res) => {
-  res.render('login-register', { error: null });
 });
 
 app.post('/login', async (req, res) => {
@@ -167,22 +161,20 @@ app.post('/login', async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.render('login-register', { error: 'Invalid email or password' });
+      return res.render('login', { error: 'Invalid email or password' });
     }
 
     // Replace with your login logic (e.g., password comparison)
     if (password !== user.password) {
-      return res.render('login-register', { error: 'Invalid email or password' });
+      return res.render('login', { error: 'Invalid email or password' });
     }
 
     req.session.user = user;
 
-    res.redirect('/');
+    res.redirect('/'); // Added / to the route
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .render('login-register', { error: 'Internal server error' });
+    res.status(500).render('login', { error: 'Internal server error' });
   }
 });
 
