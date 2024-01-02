@@ -20,6 +20,11 @@ const userSchema = new mongoose.Schema({
   username: String,
   email: String,
   password: String,
+  avatar: {
+    data: Buffer,
+    contentType: String,
+  },
+  bio: String,
 });
 
 const User = mongoose.model('User', userSchema);
@@ -28,6 +33,7 @@ const postSchema = new mongoose.Schema({
   title: String,
   link: String,
   category: String,
+  content: String,
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -112,7 +118,6 @@ app.get('/privacy-policy', (req, res) => {
   res.render('privacy-policy', { user: req.session.user });
 });
 
-// Middleware to check if the user is logged in
 const isLoggedIn = (req, res, next) => {
   if (req.session.user) {
     return next();
@@ -142,7 +147,9 @@ app.post('/sign', async (req, res) => {
     const newUser = new User({
       username,
       email,
-      password, // Replace with your registration logic (e.g., hashing password)
+      password, 
+      avatar: null, // Default avatar is null initially
+      bio: 'Welcome to my profile!',
     });
 
     await newUser.save();
@@ -153,6 +160,25 @@ app.post('/sign', async (req, res) => {
     res.status(500).render('sign', { error: 'Internal server error' });
   }
 });
+app.post('/register', upload.single('avatar'), (req, res) => {
+  // Process registration data, including avatar upload
+  const { username, email, password, bio } = req.body;
+
+  // Save the avatar URL (you may need to handle avatar storage properly based on your needs)
+  const avatarUrl = req.file ? `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}` : null;
+
+  const newUser = new User({ username, email, bio, avatar: avatarUrl });
+  User.register(newUser, password, (err, user) => {
+      if (err) {
+          console.error(err);
+          return res.render('register', { error: err.message });
+      }
+      passport.authenticate('local')(req, res, () => {
+          res.redirect('/');
+      });
+  });
+});
+
 
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -192,7 +218,7 @@ app.get('/', async (req, res) => {
 
   try {
     const posts = await Post.find(filter)
-      .populate('userId', 'username')
+      .populate('userId', 'username avatar bio') // Populate user details for each post
       .populate('comments.userId', 'username')
       .sort({ timestamp: -1 });
 
@@ -247,31 +273,60 @@ app.get('/logout', (req, res) => {
     res.redirect('/login');
   });
 });
-app.post('/post-link', upload.single('image'), isLoggedIn, async (req, res) => {
-  const { title, link, category } = req.body;
-  const userId = req.session.user._id;
-  const image = req.file;
 
+app.get('/profile/:username', (req, res) => {
+  const requestedUsername = req.params.username;
+
+  // Fetch the user with the given username from the database
+  User.findOne({ username: requestedUsername }, (err, userProfile) => {
+      if (err || !userProfile) {
+          console.error(err);
+          return res.render('error', { error: 'User not found' });
+      }
+      res.render('profile', { userProfile });
+  });
+});
+
+app.get('/profile', isLoggedIn, async (req, res) => {
   try {
-    const newPost = new Post({
-      title,
-      link,
-      category,
-      userId,
-      image: image ? { data: image.buffer, contentType: image.mimetype } : undefined,
-    });
-
-    await newPost.save();
-    console.log('Post created successfully.');
-    res.redirect('/');
+    const userProfile = await User.findById(req.session.user._id);
+    res.render('profile', { user: req.session.user, userProfile });
   } catch (error) {
     console.error(error);
-    res.status(500).render('dashboard', { error: 'Internal server error' });
+    res.status(500).render('error', { error: 'Internal server error' });
   }
 });
 
-app.post('/post-description', upload.single('image'), isLoggedIn, async (req, res) => {
-  const { title, link, category } = req.body;
+app.post('/update-profile', isLoggedIn, upload.single('avatar'), async (req, res) => {
+  const { bio } = req.body;
+  const userId = req.session.user._id;
+  const avatar = req.file;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    // Update user's bio
+    user.bio = bio;
+
+    // Update user's avatar if a new one is provided
+    if (avatar) {
+      user.avatar = { data: avatar.buffer, contentType: avatar.mimetype };
+    }
+
+    await user.save();
+    res.redirect('/profile'); // Redirect to the updated profile page
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal server error');
+  }
+});
+
+app.post('/create-post', upload.single('image'), isLoggedIn, async (req, res) => {
+  const { title, link, category, content } = req.body;
   const userId = req.session.user._id;
   const image = req.file;
 
@@ -280,6 +335,7 @@ app.post('/post-description', upload.single('image'), isLoggedIn, async (req, re
       title,
       link,
       category,
+      content,
       userId,
       image: image ? { data: image.buffer, contentType: image.mimetype } : undefined,
     });
