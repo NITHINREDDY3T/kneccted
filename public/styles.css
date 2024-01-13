@@ -147,7 +147,7 @@ header {
 
 h1 {
     font-size: 2.5em;
-    color:#ff0077;
+    color:#ffffff;
 
 }
 
@@ -245,7 +245,7 @@ ul.category-list li {
 /* Logout link */
 a[href="/logout"] {
     position: absolute;
-    top: 137px;
+    top: 75px;
     right: 0px;
     color: #fff;
     background-color: #ff0077;
@@ -402,13 +402,22 @@ footer {
     padding: 20px;
     text-align: center;
 }
+.post-image {
+   
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-top: 1px;
+    border: 3.5px solid #00000063;
+    border-radius: 3.7px;
+}
 
 
 @media (max-width: 600px) {
    
     a[href="/logout"] {
         position: absolute;
-        top: 185.5px;
+        top: 75.5px;
         right: 0px;
         color: #fff;
         background-color: #ff0077;
@@ -425,11 +434,13 @@ footer {
         text-align: center;
     }
     .post-image {
-        width: 66%;
+        width: 70%;
         max-height: 300px;
         object-fit: cover;
-        border-radius: 8px;
-        margin-top: 15px;
+        border-radius: 20px;
+        margin-top: 1px;
+        border: 3.5px solid #00000063;
+        border-radius: 3.7px;
     }
     p.why-built,
     p.info {
