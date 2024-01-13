@@ -296,6 +296,18 @@ app.get('/profile', isLoggedIn, async (req, res) => {
     res.status(500).render('error', { error: 'Internal server error' });
   }
 });
+app.get('/post/:postId', async (req, res) => {
+  const { postId } = req.params;
+
+  try {
+      const post = await Post.findById(postId);
+      res.render('post-detail', { post, user: req.session.user });
+  } catch (error) {
+      console.error(error);
+      res.status(500).render('error', { error: 'Internal server error' });
+  }
+});
+
 
 app.post('/update-profile', isLoggedIn, upload.single('avatar'), async (req, res) => {
   const { bio } = req.body;
@@ -371,7 +383,7 @@ app.get('/like-post/:postId', isLoggedIn, async (req, res) => {
     }
 
     await post.save();
-    res.redirect('/');
+    res.redirect(`/post/${postId}`); // Redirect to the post-detail page
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal server error');
@@ -400,13 +412,12 @@ app.get('/dislike-post/:postId', isLoggedIn, async (req, res) => {
     }
 
     await post.save();
-    res.redirect('/');
+    res.redirect(`/post/${postId}`); // Redirect to the post-detail page
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal server error');
   }
 });
-
 app.post('/comment/:postId', isLoggedIn, async (req, res) => {
   const { postId } = req.params;
   const { text } = req.body;
@@ -426,13 +437,12 @@ app.post('/comment/:postId', isLoggedIn, async (req, res) => {
 
     post.comments.push(newComment);
     await post.save();
-    res.redirect('/');
+    res.redirect(`/post/${postId}`); // Redirect to the post-detail page
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal server error');
   }
 });
-
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
