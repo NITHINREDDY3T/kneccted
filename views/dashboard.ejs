@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
     <script src="https://kit.fontawesome.com/0342502787.js" crossorigin="anonymous"></script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4509911423095651"
-     crossorigin="anonymous"></script>
-<meta name="google-adsense-account" content="ca-pub-4509911423095651">
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
+
     
     <style>
         body {
@@ -21,22 +18,77 @@
             background-color: #343a40;
             color: #ffffff;
             padding: 20px 0;
+            top: auto;
         }
 
         h1 {
             font-size: 2.5em;
         }
 
-        .additional-links a {
-            color: #a32363;
-            background-color: #c3ceda;
-            margin-right: 20px;
-            text-decoration: none;
-            text-align: center;
-            border: 2px solid #ff0000;
+       /* Add these styles to your existing styles.css or in a separate stylesheet */
 
+body {
+    /* ... existing styles ... */
+    overflow-x: hidden; /* Hide horizontal scrollbar when the sidebar is open */
+}
 
-        }
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    top: 28px;
+    left: 9px;
+}
+
+/* Sidebar styling */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #e9e9e9;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #000000;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+/* Add this to your existing CSS */
+
+/* Overlay styling */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
 
         .profile-section,
         .post-section,
@@ -79,7 +131,7 @@
 
         .post-container {
             background-color: #ffffff;
-            border: 3px solid #eeb50c;
+            border: 6px solid #0026ff63;
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
@@ -123,22 +175,25 @@
             padding: 20px;
             text-align: center;
         }
-.logo-container {
-    width: 150px; /* Adjust as needed */
-    height: auto; /* Maintain aspect ratio */
-}
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Itslinked</title>
-    <link rel="icon" href="https://mail.google.com/mail/u/0/?ui=2&ik=1740a04461&attid=0.1&permmsgid=msg-f:1787274407883098072&th=18cdac9ac604c7d8&view=fimg&realattid=18cdac948a58bc28df21&disp=thd&attbid=ANGjdJ85oGY_iZdfcZ9_5BLtn374ru_oBAueTZ2KhG6yRq2A1Dxo5kq1JVvIHQ8ZRpk3Q_nazoXr1MIqMm5nFHgH1rNN62WU30Q74e9G700gQI1mtwPIC441zP4LwF8&ats=2524608000000&sz=w1920-h878" type="image/x-icon">
-</head>
+    <title>itslinked</title>
+    <link rel="icon" href="https://mail.google.com/mail/u/0/?ui=2&ik=1740a04461&attid=0.1&permmsgid=msg-f:1787981391552334254&th=18d02f9a3c7c49ae&view=fimg&realattid=ii_lrc3enp12&disp=thd&attbid=ANGjdJ-M3yLvC-u02PkjQcZo-Yj5HRlHy_KXB_YaGpCmsmzVUw-R8Mqr54bHIIGiyAAOs7iOUd8KTaGPFgefttgu2yuoype-CG8cp8_HEu3XbBUksy2QoU8gQGycMBk&ats=2524608000000&sz=w1920-h878" type="image/x-icon">
+    <link rel="shortcut icon" href="https://mail.google.com/mail/u/0/?ui=2&ik=1740a04461&attid=0.1&permmsgid=msg-f:1787981391552334254&th=18d02f9a3c7c49ae&view=fimg&realattid=ii_lrc3enp12&disp=thd&attbid=ANGjdJ-M3yLvC-u02PkjQcZo-Yj5HRlHy_KXB_YaGpCmsmzVUw-R8Mqr54bHIIGiyAAOs7iOUd8KTaGPFgefttgu2yuoype-CG8cp8_HEu3XbBUksy2QoU8gQGycMBk&ats=2524608000000&sz=w1920-h878" type="image/x-icon">
+    </head>
 <body>
 
     <header>
-        <div class="container">
+        <div id="overlay" onclick="toggleSidebar()"></div>
+
+        <div class ="container">
+        <div class="menu-icon" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class ="container">
             <h1>Welcome<%= user ? ', ' + user.username : '' %> <i class="fas fa-user"></i></h1>
-            <div class="additional-links">
+            <div class="sidebar" id="sidebar">
                 <a href="/about-us"><i class="fas fa-info-circle"></i> About Us</a>
                 <a href="/contact-us"><i class="fas fa-envelope"></i> Contact Us</a>
                 <a href="/privacy-policy"><i class="fas fa-lock"></i> Privacy Policy</a>
@@ -170,10 +225,10 @@
                         <label for="category"><i class="fas fa-folder"></i> Category:</label>
                         <select class="form-control" id="category" name="category" required>
                             <option value="Entertainment">Entertainment</option>
-                            <option value="Downloads">Downloads</option>
+                            <option value="Mods Download">Mods Download</option>
                             <option value="Education">Education</option>
-                            <option value="Live">Live</option>
-                            <option value="News">Newss</option>
+                            <option value="Live Links">Live Links</option>
+                            <option value="OTTs">OTTs</option>
                             <option value="Others">Others</option>
                         </select>
                     </div>
@@ -212,10 +267,10 @@
             <ul class="category-list">
                 <li><a href="/"><i class="fas fa-globe"></i> All</a></li>
                 <li><a href="/?category=Entertainment"><i class="fas fa-film"></i> Entertainment</a></li>
-                <li><a href="/?category=Downloads"><i class="fas fa-download"></i> Downloads</a></li>
+                <li><a href="/?category=Mods Download"><i class="fas fa-download"></i> Mods Download</a></li>
                 <li><a href="/?category=Education"><i class="fas fa-graduation-cap"></i> Education</a></li>
-                <li><a href="/?category=Live "><i class="fas fa-play"></i> Live</a></li>
-                <li><a href="/?category=News"><i class="fas fa-tv"></i> News</a></li>
+                <li><a href="/?category=Live Links"><i class="fas fa-play"></i> Live Links</a></li>
+                <li><a href="/?category=OTTs"><i class="fas fa-tv"></i> OTTs</a></li>
                 <li><a href="/?category=Others"><i class="fas fa-ellipsis-h"></i> Others</a></li>
             </ul>
         </section>
@@ -237,43 +292,31 @@
                     <h3><%= category %></h3>
                     <% posts[category].forEach(post => { %>
                         <li class="post-container">
+                            <div class="post-image-container">
+                                <% if (post.image && post.image.data) { %>
+                                    <img src="data:<%= post.image.contentType %>;base64,<%= post.image.data.toString('base64') %>" alt="Post Image" class="post-image">
+                                <% } %>
+                            </div>
                             <hr>
                             <div class="post-content">
-                                <strong><%= post.userId.username %>:</strong> <%= post.title %><br>
-                                <div class="link">
-                                <a href="<%= post.link %>" target="_blank"><%= post.link %></a><br>
-                                </div>
-                                <strong>Category:</strong> <%= post.category %><br>
-                                <strong>Content:</strong> <%= post.content %><br>
-                                <div class="like-dislike">
-                                    <a href="/like-post/<%= post._id %>"><i class="fas fa-thumbs-up"></i> Like</a>
-                                    <a href="/dislike-post/<%= post._id %>"><i class="fas fa-thumbs-down"></i> Dislike</a>
-                                </div>
                                 
-                                <strong>Likes:</strong> <%= post.likes.length %>
-                                <strong>Dislikes:</strong> <%= post.dislikes.length %><br>
-                                <button class="show-comments-button" data-post-id="<%= post._id %>">See Comments</button>
-                                <small><%= timeAgo(post.timestamp) %></small>
-                                <h3>Comments</h3>
-                                <ul class="comment-list" data-post-id="<%= post._id %>">
-                                    <% post.comments.forEach(comment => { %>
-                                        <li>
-                                            <strong><%= comment.userId.username %>:</strong> <%= comment.text %><br>
-                                        </li>
-                                    <% }); %>
-                                </ul>
-                                <form class="comment-form" action="/comment/<%= post._id %>" method="post">
-                                    <label for="comment">Add a comment:</label>
-                                    <input type="text" class="form-control" id="comment" name="text" required>
-                                    <button type="submit" class="btn btn-primary mt-2">Comment</button>
-                                </form>
+                                <div class="post-header">
+                                    <strong><%= post.userId.username %>:</strong>
+                                    <h3><a href="/post/<%= post._id %>"><%= post.title %></a></h3>
+                                </div>
+                    
+                                <div class="post-meta">
+                                    <strong>Category:</strong> <%= post.category %><br>
+                                    <strong><i class="fas fa-thumbs-up"></i></strong> <%= post.likes.length %>
+                                    <strong><i class="fas fa-thumbs-down"></i></strong> <%= post.dislikes.length %><br>
+                                    <small><%= timeAgo(post.timestamp) %></small>
+                                </div>
+                    
+                               
                             </div>
-                            <% if (post.image && post.image.data) { %>
-                                <img src="data:<%= post.image.contentType %>;base64,<%= post.image.data.toString('base64') %>" alt="Post Image" class="post-image">
-                            <% } %> 
-
                         </li>
                     <% }); %>
+                    
                 <% } %>
             </ul>
             <% if (user) { %>
@@ -363,14 +406,27 @@
             }
         });
     }
+    <!-- Add this script at the bottom of your dashboard.ejs file -->
+
+    function toggleSidebar() {
+    var sidebar = document.getElementById("sidebar");
+    var overlay = document.getElementById("overlay");
+
+    if (sidebar.style.width === "250px") {
+        // If sidebar is open, close it
+        sidebar.style.width = "0";
+        overlay.style.display = "none";
+    } else {
+        // If sidebar is closed, open it
+        sidebar.style.width = "250px";
+        overlay.style.display = "block";
+    }
+}
+
+
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-var infolinks_pid = 3412315;
-var infolinks_wsid = 0;
-</script>
-<script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>
-
 </body>
 </html>
