@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.title %></title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Add Font Awesome CSS link here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        p {
+            font-size: 18px;
+            color: #6c757d;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        .link {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.link-icon {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #28a745;
+}
+
+.link a {
+    color: #28a745;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.link a:hover {
+    color: #218838;
+}
+
+
+        .post-content {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .like-dislike a {
+            margin-right: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .like-dislike a:hover {
+            text-decoration: underline;
+        }
+
+        .comment-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+
+        .comment-list li {
+            margin-bottom: 10px;
+        }
+
+        .show-comments-button {
+            background-color: #02f840;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .show-comments-button:hover {
+            background-color: #02d630;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1><%= post.title %></h1>
+        <p>Category: <%= post.category %></p>
+
+        <% if (post.image && post.image.data) { %>
+            <img src="data:<%= post.image.contentType %>;base64,<%= post.image.data.toString('base64') %>" alt="Post Image">
+        <% } %>
+
+        <div class="link">
+            <span class="link-icon"><i class="fas fa-external-link-alt"></i></span>
+            <a href="<%= post.link %>" target="_blank">Visit the Link</a>
+        </div>
+        
+
+        <div class="post-content">
+            <%= post.content %>
+        </div><br>
+
+        <div class="post-actions">
+    <a href="/like-post/<%= post._id %>" class="btn btn-primary"><i class="fas fa-thumbs-up"></i> Like (<%= post.likes.length %>)</a>
+    <a href="/dislike-post/<%= post._id %>" class="btn btn-danger"><i class="fas fa-thumbs-down"></i> Dislike (<%= post.dislikes.length %>)</a>
+    <!-- Add more actions as needed -->
+</div>
+<br>
+<button class="btn btn-primary show-comments-button mt-2" data-post-id="<%= post._id %>">
+    <i class="fas fa-comments"></i> See Comments
+</button>
+
+<h3>Comments</h3>
+<ul class="comment-list" data-post-id="<%= post._id %>" style="display: none;">
+    <% post.comments.forEach(comment => { %>
+        <li>
+            <% if (comment.userId && comment.userId.username) { %>
+              
+                <strong><%= comment.userId.username %>:</strong>
+            <% } %>
+            <%= comment.text %><br>
+        </li>
+    <% }); %>
+    
+</ul>
+
+<form class="comment-form" action="/comment/<%= post._id %>" method="post">
+    <label for="comment">Add a comment:</label>
+    <input type="text" class="form-control" id="comment" name="text" required>
+    <button type="submit" class="btn btn-primary mt-2">Comment</button>
+</form>
+                            
+</div>
+    <script>
+        function timeAgo(timestamp) {
+            const now = new Date();
+            const postedTime = new Date(timestamp);
+            const timeDiff = now - postedTime;
+            const seconds = Math.floor(timeDiff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+
+            if (days > 0) {
+                return days + ' day(s) ago';
+            } else if (hours > 0) {
+                return hours + ' hour(s) ago';
+            } else if (minutes > 0) {
+                return minutes + ' minute(s) ago';
+            } else {
+                return 'Just now';
+            }
+        }
+
+        
+        
+        document.addEventListener('DOMContentLoaded', () => {
+        const showCommentsButtons = document.querySelectorAll('.show-comments-button');
+        
+        showCommentsButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const postId = button.getAttribute('data-post-id');
+                const commentsList = document.querySelector(`.comment-list[data-post-id="${postId}"]`);
+                const commentForm = document.querySelector(`.comment-form[data-post-id="${postId}"]`);
+
+                if (commentsList.style.display === 'none' || commentsList.style.display === '') {
+                    commentsList.style.display = 'block';
+                    button.textContent = 'Hide Comments';
+                } else {
+                    commentsList.style.display = 'none';
+                    button.textContent = 'See Comments';
+                }
+            });
+        });
+    });
+
+        // Add event listeners for like and dislike buttons
+        const likeButtons = document.querySelectorAll('.like-button');
+        const dislikeButtons = document.querySelectorAll('.dislike-button');
+
+        likeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const postId = button.getAttribute('data-post-id');
+                // Implement the logic for handling a like
+                console.log(`Like clicked for post ${postId}`);
+            });
+        });
+
+        dislikeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const postId = button.getAttribute('data-post-id');
+                // Implement the logic for handling a dislike
+                console.log(`Dislike clicked for post ${postId}`);
+            });
+        });
+        function searchPosts() {
+        const searchInput = document.getElementById('search').value.toLowerCase();
+        const posts = document.querySelectorAll('.post-container');
+
+        posts.forEach(post => {
+            const title = post.querySelector('.post-content strong').textContent.toLowerCase();
+            if (title.includes(searchInput)) {
+                post.style.display = 'block';
+            } else {
+                post.style.display = 'none';
+            }
+        });
+    }
+    </script>
+
+    <!-- Add Bootstrap JS and Popper.js scripts here -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Add Font Awesome script here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"></script>
+</body>
+
+</html>
