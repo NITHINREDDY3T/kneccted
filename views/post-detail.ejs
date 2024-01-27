@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9WPBC7HFC8"></script>
@@ -10,148 +11,72 @@
 
   gtag('config', 'G-9WPBC7HFC8');
 </script>
-    <script src="https://kit.fontawesome.com/0342502787.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.title %></title>
+    <!-- Add Bootstrap CSS link here -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <!-- Add Font Awesome CSS link here -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-
-
-    
+    <link rel="icon" href="https://mail.google.com/mail/u/0/?ui=2&ik=1740a04461&attid=0.1&permmsgid=msg-f:1787981391552334254&th=18d02f9a3c7c49ae&view=fimg&realattid=ii_lrc3enp12&disp=thd&attbid=ANGjdJ-M3yLvC-u02PkjQcZo-Yj5HRlHy_KXB_YaGpCmsmzVUw-R8Mqr54bHIIGiyAAOs7iOUd8KTaGPFgefttgu2yuoype-CG8cp8_HEu3XbBUksy2QoU8gQGycMBk&ats=2524608000000&sz=w1920-h878" type="image/x-icon">
+    <link rel="shortcut icon" href="https://mail.google.com/mail/u/0/?ui=2&ik=1740a04461&attid=0.1&permmsgid=msg-f:1787981391552334254&th=18d02f9a3c7c49ae&view=fimg&realattid=ii_lrc3enp12&disp=thd&attbid=ANGjdJ-M3yLvC-u02PkjQcZo-Yj5HRlHy_KXB_YaGpCmsmzVUw-R8Mqr54bHIIGiyAAOs7iOUd8KTaGPFgefttgu2yuoype-CG8cp8_HEu3XbBUksy2QoU8gQGycMBk&ats=2524608000000&sz=w1920-h878" type="image/x-icon">
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
             background-color: #f8f9fa;
-            color: #36475a;
-        }
-
-        header {
-            background-color: #343a40;
-            color: #ffffff;
-            padding: 20px 0;
-            top: auto;
+            padding: 20px;
         }
 
         h1 {
-            font-size: 2.5em;
-        }
-
-       /* Add these styles to your existing styles.css or in a separate stylesheet */
-
-body {
-    /* ... existing styles ... */
-    overflow-x: hidden; /* Hide horizontal scrollbar when the sidebar is open */
-}
-
-.menu-icon {
-    font-size: 24px;
-    cursor: pointer;
-    color: #fff;
-    position: absolute;
-    top: 28px;
-    left: 9px;
-}
-
-/* Sidebar styling */
-.sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #e9e9e9;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
-
-.sidebar a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidebar a:hover {
-    color: #000000;
-}
-
-.sidebar .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-/* Add this to your existing CSS */
-
-/* Overlay styling */
-#overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-
-        .profile-section,
-        .post-section,
-        .auth-section,
-        .why-built-section,
-        .info-section,
-        .category-section,
-        .posts-section {
-            margin-top: 30px;
-        }
-
-        h2 {
             color: #007bff;
-            margin-bottom: 20px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        .category-list li {
-            margin: 0 15px;
+        p {
             font-size: 18px;
+            color: #6c757d;
         }
 
-        .posts-list {
-            list-style: none;
-            padding: 0;
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
         }
 
-        .post-container {
-            background-color: #ffffff;
-            border: 4.0px solid #0026ff63;
-            border-radius: 6px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease-in-out;
+        .link {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.link-icon {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #ff0000;
+}
+
+.link a {
+    color: #ff0000;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.link a:hover {
+    color: #218838;
+}
+
+
+        .post-content {
+            margin-top: 20px;
+            font-size: 16px;
         }
 
-        .post-container:hover {
-            transform: scale(1.02);
+        .like-dislike a {
+            margin-right: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .like-dislike a:hover {
+            text-decoration: underline;
         }
 
         .comment-list {
@@ -177,192 +102,73 @@ body {
         .show-comments-button:hover {
             background-color: #02d630;
         }
-
-        footer {
-            margin-top: 30px;
-            background-color: #ffffff;
-            color: #010101;
-            width: 100%;
-            padding: 20px;
-            text-align: center;
-        }
-        .company-logo {
-    width: 40px; 
-    height: 40px; 
-    border-radius: 50%; 
-    
-}
     </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="monetag" content="9b7a321c53c43560c5e5c81db7b29a5b">
 
-    <title>itslinked</title>
-    <link rel="icon" href="https://mail.google.com/mail/u/0/?ui=2&ik=1740a04461&attid=0.1&permmsgid=msg-f:1787981391552334254&th=18d02f9a3c7c49ae&view=fimg&realattid=ii_lrc3enp12&disp=thd&attbid=ANGjdJ-M3yLvC-u02PkjQcZo-Yj5HRlHy_KXB_YaGpCmsmzVUw-R8Mqr54bHIIGiyAAOs7iOUd8KTaGPFgefttgu2yuoype-CG8cp8_HEu3XbBUksy2QoU8gQGycMBk&ats=2524608000000&sz=w1920-h878" type="image/x-icon">
-    <link rel="shortcut icon" href="https://mail.google.com/mail/u/0/?ui=2&ik=1740a04461&attid=0.1&permmsgid=msg-f:1787981391552334254&th=18d02f9a3c7c49ae&view=fimg&realattid=ii_lrc3enp12&disp=thd&attbid=ANGjdJ-M3yLvC-u02PkjQcZo-Yj5HRlHy_KXB_YaGpCmsmzVUw-R8Mqr54bHIIGiyAAOs7iOUd8KTaGPFgefttgu2yuoype-CG8cp8_HEu3XbBUksy2QoU8gQGycMBk&ats=2524608000000&sz=w1920-h878" type="image/x-icon">
-    </head>
+</head>
+
 <body>
 
-    <header>
-        <div id="overlay" onclick="toggleSidebar()"></div>
+    <div class="container">
+        <h1><%= post.title %></h1>
 
-        <div class ="container">
-        <div class="menu-icon" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-        </div>
-        <div class ="container">
-            <h1><img src="https://mail.google.com/mail/u/0?ui=2&amp;ik=1740a04461&amp;attid=0.1&amp;permmsgid=msg-f:1787981391552334254&amp;th=18d02f9a3c7c49ae&amp;view=fimg&amp;fur=ip&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ8Yt5RZdkyF___mjCyXlFVtJRCZrgeBkh3tFrkPLbZ7NxA6AHa8tC8w80PQJMLD7C4a88xv2eIsbi_lan1YWp4vgz4w9IWb_oy2lThZXiZTlOJGvgWnWcD4GUw&amp;disp=emb&amp;realattid=ii_lrc3enp12" alt="Company Logo" class="company-logo"> Itslinked.in<%= user ? ', ' + user.username : '' %> </h1>
-            <div class="sidebar" id="sidebar">
-                <a href="/about-us"><i class="fas fa-info-circle"></i> About Us</a>
-                <a href="/contact-us"><i class="fas fa-envelope"></i> Contact Us</a>
-                <a href="/privacy-policy"><i class="fas fa-lock"></i> Privacy Policy</a>
-            </div>
-        </div>
-    </header>
-
-    <div class="container mt-5">
-
-        <% if (user) { %>
-            <section class="profile-section">
-                <h2>Your Profile</h2>
-                <p><i class="fas fa-user"></i> Username: <%= user.username %></p>
-                <p><i class="fas fa-at"></i> Email: <%= user.email %></p>
-            </section>
-
-            <section class="post-section mt-4">
-                <h2>Post a Link</h2>
-                <form action="/create-post" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="title"><i class="fas fa-heading"></i> Title:</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="link"><i class="fas fa-link"></i> Link:</label>
-                        <input type="text" class="form-control" id="link" name="link" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="category"><i class="fas fa-folder"></i> Category:</label>
-                        <select class="form-control" id="category" name="category" required>
-                            <option value="Entertainment">Entertainment</option>
-                            <option value="Internships/Jobs">Internships/Jobs</option>
-                            <option value="Education">Education</option>
-                            <option value="Tech">Tech</option>
-                            <option value="Books">Books</option>
-                            <option value="Others">Others</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="content"><i class="fas fa-file-alt"></i> Content:</label>
-                        <textarea class="form-control" id="content" name="content" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="image"><i class="fas fa-image"></i> Image:</label>
-                        <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
-                    </div>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Submit</button>
-                </form>
-                <section class="info-section mt-4">
-                    <h2 class="info">Disclaimer!!</h2>
-                    <p class="info">"Don't post or upload any unwanted or illegal content links. If you do, it will be removed by the database administrator."</p>
-                </section>
-            </section>
-        <% } else { %>
-            <section class="auth-section mt-4">
-                <div class="auth-buttons">
-                    <a href="/login" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</a>
-                    <a href="/sign" class="btn btn-success"><i class="fas fa-user-plus"></i> Sign Up</a>
-                </div>
-            </section>
+        <p>Category: <%= post.category %></p>
+<script type="text/javascript">
+            atOptions = {
+                'key' : 'b2ce07d8fcad41f122e5837b0758aebf',
+                'format' : 'iframe',
+                'height' : 60,
+                'width' : 468,
+                'params' : {}
+            };
+            document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/b2ce07d8fcad41f122e5837b0758aebf/invoke.js"></scr' + 'ipt>');
+        </script>
+<br>
+        <% if (post.image && post.image.data) { %>
+            <img src="data:<%= post.image.contentType %>;base64,<%= post.image.data.toString('base64') %>" alt="Post Image">
         <% } %>
 
-        
-
-       
-
-        <section class="category-section mt-4">
-            <h2>Filter by Category:</h2>
-            <ul class="category-list">
-                <li><a href="/"><i class="fas fa-globe"></i> All</a></li>
-                <li><a href="/?category=Entertainment"><i class="fas fa-film"></i><i class="fas fa-music"></i> Entertainment</a></li>
-                <li><a href="/?category=Internships/Jobs"><i class="fas fa-briefcase"></i> Internships/Jobs</a></li>
-
-                <li><a href="/?category=Education"><i class="fas fa-graduation-cap"></i> Education</a></li>
-                <li><a href="/?category=Tech"><i class="fas fa-laptop"></i> Tech</a></li>
-                <li><a href="/?category=Books"><i class="fas fa-book"></i> Books</a></li>
-                <li><a href="/?category=Others"><i class="fas fa-ellipsis-h"></i> Others</a></li>
-            </ul>
-        </section>
-        
-
-        <section class="posts-section mt-4">
-            <h2>Posts</h2>
-            <% if (error) { %>
-                <p>Error: <%= error %></p>
-            <% } %>
-            <form action="/" method="get" class="form-inline">
-                <div class="form-group">
-                    <label for="search">Search by Title:</label>
-                    <input type="text" class="form-control" id="search" name="search" oninput="searchPosts()">
-                </div>
-                <button type="submit" class="btn btn-primary ml-2">Search</button>
-            </form>
-            <ul class="posts-list">
-                <% for (const category in posts) { %>
-                    <h3><%= category %></h3>
-                    <% posts[category].forEach(post => { %>
-                        <li class="post-container">
-                            <div class="post-image-container">
-                                <% if (post.image && post.image.data) { %>
-                                    <img src="data:<%= post.image.contentType %>;base64,<%= post.image.data.toString('base64') %>" alt="Post Image" class="post-image">
-                                <% } %>
-                            </div>
-                            <hr>
-                            <div class="post-content">
-                                
-                                <div class="post-header">
-                                    <strong><%= post.userId.username %>:</strong>
-                                    <h3><a href="/post/<%= post._id %>"><%= post.title %></a></h3>
-                                </div>
-                    
-                                <div class="post-meta">
-                                    <strong>Category:</strong> <%= post.category %><br>
-                                    <strong><i class="fas fa-thumbs-up"></i></strong> <%= post.likes.length %>
-                                    <strong><i class="fas fa-thumbs-down"></i></strong> <%= post.dislikes.length %><br>
-                                    <small><%= timeAgo(post.timestamp) %></small>
-                                </div>
-                    
-                               
-                            </div>
-            <script type="text/javascript">
-                                atOptions = {
-                                    'key' : 'b2ce07d8fcad41f122e5837b0758aebf',
-                                    'format' : 'iframe',
-                                    'height' : 60,
-                                    'width' : 468,
-                                    'params' : {}
-                                };
-                                document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/b2ce07d8fcad41f122e5837b0758aebf/invoke.js"></scr' + 'ipt>');
-                            </script>
-                        </li>
-                    <% }); %>
-                    
-                <% } %>
-            </ul>
-            <% if (user) { %>
-                <a href="/logout" class="btn btn-danger mt-3">Logout</a>
-            <% } %>
-        </section>
-
-    </div>
-
-    <footer class="mt-5">
-        <div class="container">
-            <!-- Your footer content goes here -->
-            &copy; 2024 itslinked.in -by nikki 
+        <div class="link">
+            <span class="link-icon"><i class="fas fa-external-link-alt"></i></span>
+            <a href="<%= post.link %>" target="_blank">Visit the Link</a>
         </div>
-    </footer>
+        
 
+        <div class="post-content">
+            <%= post.content %>
+        </div><br>
 
+        <div class="post-actions">
+    <a href="/like-post/<%= post._id %>" class="btn btn-primary"><i class="fas fa-thumbs-up"></i> Like (<%= post.likes.length %>)</a>
+    <a href="/dislike-post/<%= post._id %>" class="btn btn-danger"><i class="fas fa-thumbs-down"></i> Dislike (<%= post.dislikes.length %>)</a>
+    <!-- Add more actions as needed -->
+</div>
+<br>
+<button class="btn btn-primary show-comments-button mt-2" data-post-id="<%= post._id %>">
+    <i class="fas fa-comments"></i> See Comments
+</button>
+
+<h3>Comments</h3>
+<ul class="comment-list" data-post-id="<%= post._id %>" style="display: none;">
+    <% post.comments.forEach(comment => { %>
+        <li>
+            <% if (comment.userId && comment.userId.username) { %>
+              
+                <strong><%= comment.userId.username %>:</strong>
+            <% } %>
+            <%= comment.text %><br>
+        </li>
+    <% }); %>
+    
+</ul>
+
+<form class="comment-form" action="/comment/<%= post._id %>" method="post">
+    <label for="comment">Add a comment:</label>
+    <input type="text" class="form-control" id="comment" name="text" required>
+    <button type="submit" class="btn btn-primary mt-2">Comment</button>
+</form>
+                            
+</div>
     <script>
         function timeAgo(timestamp) {
             const now = new Date();
@@ -384,7 +190,11 @@ body {
             }
         }
 
+        
+        
+        document.addEventListener('DOMContentLoaded', () => {
         const showCommentsButtons = document.querySelectorAll('.show-comments-button');
+        
         showCommentsButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const postId = button.getAttribute('data-post-id');
@@ -393,15 +203,14 @@ body {
 
                 if (commentsList.style.display === 'none' || commentsList.style.display === '') {
                     commentsList.style.display = 'block';
-                    commentForm.style.display = 'block';
                     button.textContent = 'Hide Comments';
                 } else {
                     commentsList.style.display = 'none';
-                    commentForm.style.display = 'none';
                     button.textContent = 'See Comments';
                 }
             });
         });
+    });
 
         // Add event listeners for like and dislike buttons
         const likeButtons = document.querySelectorAll('.like-button');
@@ -435,28 +244,14 @@ body {
             }
         });
     }
-    <!-- Add this script at the bottom of your dashboard.ejs file -->
-
-    function toggleSidebar() {
-    var sidebar = document.getElementById("sidebar");
-    var overlay = document.getElementById("overlay");
-
-    if (sidebar.style.width === "250px") {
-        // If sidebar is open, close it
-        sidebar.style.width = "0";
-        overlay.style.display = "none";
-    } else {
-        // If sidebar is closed, open it
-        sidebar.style.width = "250px";
-        overlay.style.display = "block";
-    }
-}
-
-
-
     </script>
+
+    <!-- Add Bootstrap JS and Popper.js scripts here -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Add Font Awesome script here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"></script>
 <script type="text/javascript">
     aclib.runAutoTag({
         zoneId: 'tc8cjz8phd',
@@ -465,4 +260,5 @@ body {
 
 
 </body>
+
 </html>
