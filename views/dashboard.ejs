@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
 
     
     <style>
@@ -184,6 +186,12 @@ body {
             padding: 20px;
             text-align: center;
         }
+        .company-logo {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    
+}
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -203,7 +211,7 @@ body {
             <i class="fas fa-bars"></i>
         </div>
         <div class ="container">
-            <h1>Welcome<%= user ? ', ' + user.username : '' %> <i class="fas fa-user"></i></h1>
+            <h1><img src="https://mail.google.com/mail/u/0?ui=2&amp;ik=1740a04461&amp;attid=0.1&amp;permmsgid=msg-f:1787981391552334254&amp;th=18d02f9a3c7c49ae&amp;view=fimg&amp;fur=ip&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ8Yt5RZdkyF___mjCyXlFVtJRCZrgeBkh3tFrkPLbZ7NxA6AHa8tC8w80PQJMLD7C4a88xv2eIsbi_lan1YWp4vgz4w9IWb_oy2lThZXiZTlOJGvgWnWcD4GUw&amp;disp=emb&amp;realattid=ii_lrc3enp12" alt="Company Logo" class="company-logo"> Itslinked.in<%= user ? ', ' + user.username : '' %> </h1>
             <div class="sidebar" id="sidebar">
                 <a href="/about-us"><i class="fas fa-info-circle"></i> About Us</a>
                 <a href="/contact-us"><i class="fas fa-envelope"></i> Contact Us</a>
@@ -236,10 +244,10 @@ body {
                         <label for="category"><i class="fas fa-folder"></i> Category:</label>
                         <select class="form-control" id="category" name="category" required>
                             <option value="Entertainment">Entertainment</option>
-                            <option value="Mods Download">Mods Download</option>
+                            <option value="Internships/Jobs">Internships/Jobs</option>
                             <option value="Education">Education</option>
-                            <option value="Live Links">Live Links</option>
-                            <option value="OTTs">OTTs</option>
+                            <option value="Tech">Tech</option>
+                            <option value="Books">Books</option>
                             <option value="Others">Others</option>
                         </select>
                     </div>
@@ -253,6 +261,10 @@ body {
                     </div>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Submit</button>
                 </form>
+                <section class="info-section mt-4">
+                    <h2 class="info">Disclaimer!!</h2>
+                    <p class="info">"Don't post or upload any unwanted or illegal content links. If you do, it will be removed by the database administrator."</p>
+                </section>
             </section>
         <% } else { %>
             <section class="auth-section mt-4">
@@ -263,28 +275,24 @@ body {
             </section>
         <% } %>
 
-        <section class="why-built-section mt-4">
-            <h2 class="why-built">Why I Built This Website ?</h2>
-            <p class="why-built">To unite passions and foster meaningful conversations. Explore, share, and connect in a world of limitless possibilities.</p>
-        </section>
+        
 
-        <section class="info-section mt-4">
-            <h2 class="info">Disclaimer!!</h2>
-            <p class="info">"Don't post or upload any unwanted or illegal content links. If you do, it will be removed by the database administrator."</p>
-        </section>
+       
 
         <section class="category-section mt-4">
             <h2>Filter by Category:</h2>
             <ul class="category-list">
                 <li><a href="/"><i class="fas fa-globe"></i> All</a></li>
-                <li><a href="/?category=Entertainment"><i class="fas fa-film"></i> Entertainment</a></li>
-                <li><a href="/?category=Mods Download"><i class="fas fa-download"></i> Mods Download</a></li>
+                <li><a href="/?category=Entertainment"><i class="fas fa-film"></i><i class="fas fa-music"></i> Entertainment</a></li>
+                <li><a href="/?category=Internships/Jobs"><i class="fas fa-briefcase"></i> Internships/Jobs</a></li>
+
                 <li><a href="/?category=Education"><i class="fas fa-graduation-cap"></i> Education</a></li>
-                <li><a href="/?category=Live Links"><i class="fas fa-play"></i> Live Links</a></li>
-                <li><a href="/?category=OTTs"><i class="fas fa-tv"></i> OTTs</a></li>
+                <li><a href="/?category=Tech"><i class="fas fa-laptop"></i> Tech</a></li>
+                <li><a href="/?category=Books"><i class="fas fa-book"></i> Books</a></li>
                 <li><a href="/?category=Others"><i class="fas fa-ellipsis-h"></i> Others</a></li>
             </ul>
         </section>
+        
 
         <section class="posts-section mt-4">
             <h2>Posts</h2>
