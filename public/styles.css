@@ -193,9 +193,9 @@ button[type="submit"] {
     background-color: #007bff;
     color: #fff;
     border: none;
-    padding: 15px 25px;
+    padding: 10px 20px;
     cursor: pointer;
-    border-radius: 40px;
+    border-radius: 12px;
     transition: background-color 0.3s ease-in-out;
 }
 
@@ -436,13 +436,13 @@ footer {
         text-align: center;
     }
     .post-image {
-        width: 70%;
-        max-height: 300px;
-        object-fit: cover;
-        border-radius: 20px;
-        margin-top: 1px;
-        border: 3.5px solid #00000063;
-        border-radius: 3.7px;
+        width: 170px;
+    max-height: 240px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-top: 0px;
+    border: 1.5px solid #000000;
+       
     }
     p.why-built,
     p.info {
