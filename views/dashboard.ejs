@@ -331,6 +331,9 @@ body {
                                     <strong><i class="fas fa-thumbs-up"></i></strong> <%= post.likes.length %>
                                     <strong><i class="fas fa-thumbs-down"></i></strong> <%= post.dislikes.length %><br>
                                     <small><%= timeAgo(post.timestamp) %></small>
+                                  <button class="btn btn-secondary share-button" style="margin-right: 10px;" onclick="sharePost('<%= post._id %>', '<%= post.title %>', '<%= post.link %>')">
+                                        <i class="fas fa-share"></i> Share
+                                    </button>
                                 </div>
                     
                                
@@ -448,6 +451,23 @@ body {
 
 
 
+    </script>
+ <script>
+        function sharePost(postId, title, link) {
+            // Check if the Web Share API is available
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    url: '/post/' + postId
+                })
+                .then(() => console.log('Shared successfully'))
+                .catch((error) => console.error('Error sharing:', error));
+            } else {
+                // Fallback for browsers that do not support Web Share API
+                // Redirect the user to the post-detail page with the postId parameter
+                window.location.href = '/' + postId;
+            }
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
